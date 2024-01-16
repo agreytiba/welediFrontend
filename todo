@@ -1,0 +1,68 @@
+9-1-2023
+
+v- in the settings account is bugging
+v- show confirmation on submit.
+v- fine up the settings page  remove skill left
+v- Finish the profile component
+v- test the pagination
+v- add 0 to downloads count its showing nothing
+v- fix the navbar in the account selection
+v- fnish the favourits - start in figma and finish design
+v- navigating throu template sometimes throw an email bug needs fix
+v-Change the border of the cover list item and like the one in employment.
+
+
+10-1-2023
+
+v-   fix the sizes in the resumes to fill
+v -  added italian greek language 
+v -  lazy load resumes images in the template selection
+v -  make sure the templates are all added and there is no duplicates in both components
+v -   
+v-   add disable account in the account settings
+v- remove zzz form list item input
+
+
+11-1-2023
+
+x - add languages
+x-  add the custome translation to the app
+
+
+12 -1-2023
+
+v - add languages
+x- add custom currency. 
+v-  add the custome translation to the app
+x-  fix favourites text
+v-  Responsivness
+x-  Cover employer details are not being added to de form 
+
+13-1-2023
+
+v-   add custom currency. 
+v-   fix favourites text
+v-   edit component att skills style and make it look like the one in job seeker
+v-   add reviews to admin panel
+v-   complete translations to the payment and custom and contact pages
+v-   rebuild of home page and add trust pilot and reviews
+
+
+
+16 -1-2023
+v- responsive selector
+x-   Cover employer details are not being added to de form 
+x- Revisit of the payments buddy
+x- language dropdown color
+
+
+
+Change log 
+
+1-  Custom Currency
+2-  Added reviews
+
+
+
+
+upgrade puppeteer
