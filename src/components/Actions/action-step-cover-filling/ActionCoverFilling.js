@@ -16,6 +16,7 @@ class ActionCoverFilling extends Component {
         super(props);
         this.state = {
             addFieldsShowed: false,
+            showForm: 'personal'
         };
         this.handleAddFieldsClick = this.handleAddFieldsClick.bind(this);
         this.adjustTextarea = this.adjustTextarea.bind(this);
@@ -25,6 +26,13 @@ class ActionCoverFilling extends Component {
     }
 
     handleAddFieldsClick = (event) => {
+        event.preventDefault();
+        this.setState({
+            addFieldsShowed: !this.state.addFieldsShowed,
+        });
+    };
+    // show employer fill form
+    handleEmployerDetails = (event) => {
         event.preventDefault();
         this.setState({
             addFieldsShowed: !this.state.addFieldsShowed,
@@ -63,52 +71,61 @@ class ActionCoverFilling extends Component {
                     </div>
                     {/* {t("form.untitled")} */}
                     <div className="actionFilling__headAction">
-                        <LanguagePicker values={this.props.values} handleLanguageClick={this.props.handleLanguageClick} />
+                        {/* <LanguagePicker values={this.props.values} handleLanguageClick={this.props.handleLanguageClick} /> */}
                         <a onClick={() => this.props.resetNavigation()} className="authenticationButton">
-                            return
+                            Home
+                        </a>
+                        <a onClick={() => this.props.resetNavigation()} className="authenticationButton">
+                            back
                         </a>
                     </div>
                 </div>
                 {/* Head ends */}
 
                 {/* Form */}
-
+ <div style={{border:`1px solid #000`,padding:`10px`,borderRadius:`10px`,boxShadow:`0 0 3px #333`}}>
                 <form>
                     <div className="sectionHeading">
-                        <span className="sectionTitle">Personal Details</span>
+                        <h3 className="sectionTitle" style={{textAlign:`center`,backgroundColor:`#694aff`, color:`#fff`}}>Personal Details</h3>
                     </div>
                 </form>
-                <div className="grid-2-col">
+                <div className="grid-2-col card" >
                     <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.firstname} title={'First Name'} name="First Name" />
                     <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.lastname} title={'Last Name'} name="Last Name" />
                     <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.email} title={'Email'} name="Email" />
                     <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.phone} title={'Phone'} name="Phone" />
                     <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.address} title={'Address'} name="Address" />
-
                     <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.city} title={'City'} name="City" />
                     <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.postalcode} title={'Postal Code'} name="Postal Code" />
-                </div>
-
+                        <div style={{position:`relative`}}>
+                            <button style={{position:`absolute`,right:`0px`,bottom:`0px`, width: `100px`, backgroundColor: `green`, height: `40px`, border:`none`, color:`#fff` }}> NEXT</button>
+                        </div>
+                    </div>
+</div>
                 {/* Employer details */}
-
+ <div style={{border:`1px solid #000`,padding:`10px`,borderRadius:`10px`,boxShadow:`0 0 3px #333`}}>
+    
                 <div className="sectionHeading">
-                    <span className="sectionTitle">Employer Details</span>
+                    <h3 className="sectionTitle" style={{textAlign:`center`,backgroundColor:`green`, color:`#fff`, width:`100%`}}>Employer Details</h3>
                 </div>
 
-                <div className="grid-2-col">
+                <div className="grid-2-col card">
                     <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.employerFullName} title={'Employer Full Name'} name="Employer Full Name" />
                     <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.companyName} title={'Company Name'} name="Company Name" />
                     <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.companyAddress} title={'Company Address'} name="Company Address" />
                     <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.companyCity} title={'Company City'} name="Company City" />
                     <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.companyCity} title={'Company Postal Code'} name="Company Postal Code" />
-                </div>
+               
+                     <div style={{position:`relative`}}>
+                            <button style={{position:`absolute`,right:`0px`,bottom:`0px`, width: `100px`, backgroundColor: `green`, height: `40px`, border:`none`, color:`#fff` }}> NEXT</button>
+                        </div>
+                    </div>
                 {/* Custom Fields going to be here */}
-
+</div>
                 {/* Components prompt image and text */}
 
                 {this.props.values.components.length === 0 && (
                     <div className="cover-components">
-                        <ComponentImage className="cover-components-image" />
                         <h4>Select a component</h4>
                         <p>To fill your cover letter you need to select a component.</p>
                     </div>
@@ -203,9 +220,6 @@ class ActionCoverFilling extends Component {
 
                 {/* Add field separator */}
 
-                <div className="cover-separator">
-                    <div className="cover-separator-line"></div>
-                </div>
 
                 <div className="addFields">
                     <div className="addFields-wrapper">

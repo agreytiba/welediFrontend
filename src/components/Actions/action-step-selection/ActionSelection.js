@@ -40,7 +40,14 @@ class ActionSelection extends Component {
             { this.props.currentStep !== undefined && this.props.currentStep ===  'Template Selection' ? 
                             <h1>{t("selectionAction.titleLeft")} <span> {t("selectionAction.titleSpan")} </span> {t("selectionAction.titleRight")}</h1>
                             : this.props.currentStep ===  'Action Cover Selection' ?
-                            <h1>Select a <span>Cover</span> from the list. </h1> : ''
+                  <div>  <h2> How to create cover letter </h2>
+                  <ul>
+                    <li> 1.click the picture of template you want from  templates list</li>
+                    <li>2. fill  <span>personal details form </span> and <span>employer details form</span></li>
+                    <li>3. after fill the informations, below the template you will find two  save and Download</li>
+                  </ul>
+                  </div> : ""
+                  
 
             }
               <button onClick={this.props.handlePreviewToggle} className="btn-default  mobile-only">
