@@ -53,7 +53,7 @@ class ImgUploadInput extends Component {
   render() {
     return (
       <div className="imageInputUpload">
-        <div className="imageInputTitle">  Image</div>
+          <h4>upload image</h4>
         {<ImageUploader
           withIcon={true}
           buttonText="Choose images"

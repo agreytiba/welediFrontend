@@ -54,7 +54,6 @@ class ActionIntroduction extends Component {
   customStyles() {
     document.getElementsByTagName("body")[0].style.height = "100%";
     document.getElementsByTagName("body")[0].style.overflow = "scroll";
-    
   }
 
   componentDidMount() {
@@ -159,10 +158,9 @@ class ActionIntroduction extends Component {
           />
         </div>
         <div className="body action-introBody">
-                <div className="intro-left">
-                    <h2>Unlocking Your Professional Potential</h2>
+          <div className="intro-left">
+            <h2>Unlocking Your Professional Potential</h2>
             <div className="intro-head">
-             
               <h3>Elevate Your Career with Expertly Crafted CVs</h3>
               <ul>
                 <li>
@@ -184,22 +182,40 @@ class ActionIntroduction extends Component {
                 </li>
               </ul>
               <div className="intro-button-selection">
-                <a
+                {/* <a
                   className="light"
                   onClick={() => this.props.goToResumeSelectionStep()}
                 >
-                  {/* {t("homepageText.text3")} */}
+                  {t("homepageText.text3")}
                   CREATE CV
-                </a>
-                <a
+                </a> */}
+                <div style={{ position: `relative` }}>
+                  <button
+                    onClick={() => this.props.goToResumeSelectionStep()}
+                    class="custom-btn btn-5"
+                  >
+                    <span>Create CV</span>
+                  </button>
+                </div>
+                <div style={{ position: `relative` }}>
+                  <button
+                    onClick={() => {
+                      this.props.goToCoverSelection();
+                    }}
+                    class="custom-btn btn-5"
+                  >
+                    <span>Cover letter</span>
+                  </button>
+                </div>
+                {/* <a
                   className="dark"
                   onClick={() => {
                     this.props.goToCoverSelection();
                   }}
                 >
-                  {/* {t("homepageText.text4")}{" "} */}
+                  {t("homepageText.text4")}{" "}
                  COVER LETTER
-                </a>
+                </a> */}
               </div>
             </div>
           </div>

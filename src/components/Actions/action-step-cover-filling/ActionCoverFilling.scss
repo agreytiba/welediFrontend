@@ -23,7 +23,7 @@
    flex-direction: column;
    justify-content: center;
    align-items: center;
-   margin: 30px 0;
+   margin: 20px 0;
     .cover-components-image{
       width: 100px;
       height: 100px;
@@ -36,11 +36,11 @@
 
    overflow-y: scroll;
    overflow-x: hidden;
-   scrollbar-width: none;
+   scrollbar-width: 20px;
    -ms-overflow-style: none;
 
    &::-webkit-scrollbar {
-      display: none;
+      display: block;
    }
 }
 
@@ -69,7 +69,7 @@
       // small shadow light grey
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
       .addFieldsDrop-head {
-         padding: 15px;
+         padding: 10px;
          font-size: 0.9em;
          font-weight: bold;
          border-bottom: 1px solid rgb(234, 234, 234);
@@ -221,4 +221,28 @@
    border: 2px solid #F8FAFE;
       padding: 20px;
    border-radius: 10px;
+}
+
+// for header of each section
+.sectionTitle{
+   text-align: center;
+   margin-bottom: 5px;
+}
+        .custom-btns {
+  width:200px;
+  height: 40px;
+  color: #000;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  font-size: medium;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
 }

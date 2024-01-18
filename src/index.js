@@ -18,6 +18,7 @@ const Front = lazy(() => import('./components/Front/Front'));
 const Exporter = lazy(() => import('./components/Exporter/Exporter'));
 const Billing = lazy(() => import('./components/Billing/Plans/Plans'));
 const CustomePage = lazy(() => import('./components/CustomPage/CustomePage'));
+const Checkout = lazy(() => import('./components/Pay/Checkout'));
 
 const CoverLetter = lazy(() => import('./components/CoverLetter/CoverLetter'));
 
@@ -43,7 +44,7 @@ ReactDOM.render(
                 <Route exact path="/billing/plans" render={(props) => <Billing {...props} />} />
                 <Route exact path="/p/:custompage" render={(props) => <CustomePage {...props} />} />
                 <Route exact path="/shared/:resumeId" render={(props) => <PublicResume {...props} />} />
-
+                 <Route exact path="/checkout" component={Checkout} />
                 <Route path="/adm" render={(props) => <Admin {...props} />} />
                 <Route exact path="/front" render={(props) => <Front {...props} />} />
 

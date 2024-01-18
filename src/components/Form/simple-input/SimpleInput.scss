@@ -4,9 +4,9 @@
     display: flex;
     flex-direction: column;
     .inputTitle{
-        margin: 5px 0px;
-        color: #98A1B3;
-        font-size: 0.9em;
+        margin: 3px 0px;
+        color: #333;
+        font-size: 1rem;
         font-family: $font;
     }
     input{
@@ -23,7 +23,7 @@
         // when the input is not focused
 
     input:not(:focus)  {
-        background-color: #f1f0f3c6;
+        background-color: #e5ebee;
     }
     input:focus {
         outline-width: 0;

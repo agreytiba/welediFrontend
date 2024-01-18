@@ -18,6 +18,9 @@ class ActionCoverFilling extends Component {
             addFieldsShowed: false,
             showForm: 'personal'
         };
+        this.state = {
+            showForm: 'personal'
+        };
         this.handleAddFieldsClick = this.handleAddFieldsClick.bind(this);
         this.adjustTextarea = this.adjustTextarea.bind(this);
         this.addItemToList = this.addItemToList.bind(this);
@@ -31,12 +34,31 @@ class ActionCoverFilling extends Component {
             addFieldsShowed: !this.state.addFieldsShowed,
         });
     };
-    // show employer fill form
-    handleEmployerDetails = (event) => {
+    // diplay forms
+    handleEmployerDetails = (event,data) => {
         event.preventDefault();
-        this.setState({
-            addFieldsShowed: !this.state.addFieldsShowed,
+        switch (data) {
+            case 1:
+                 this.setState({
+            showForm:"personal" ,
         });
+                break;
+            case 2:
+                 this.setState({
+            showForm:"employer" ,
+        });
+                break;
+        
+            case 3:
+                 this.setState({
+            showForm:"other" ,
+        });
+                break;
+        
+            default:
+                break;
+        }
+        
     };
 
     adjustTextarea(event) {
@@ -75,191 +97,193 @@ class ActionCoverFilling extends Component {
                         <a onClick={() => this.props.resetNavigation()} className="authenticationButton">
                             Home
                         </a>
-                        <a onClick={() => this.props.resetNavigation()} className="authenticationButton">
-                            back
-                        </a>
                     </div>
                 </div>
+                <hr/>
                 {/* Head ends */}
 
                 {/* Form */}
- <div style={{border:`1px solid #000`,padding:`10px`,borderRadius:`10px`,boxShadow:`0 0 3px #333`}}>
-                <form>
-                    <div className="sectionHeading">
-                        <h3 className="sectionTitle" style={{textAlign:`center`,backgroundColor:`#694aff`, color:`#fff`}}>Personal Details</h3>
-                    </div>
-                </form>
-                <div className="grid-2-col card" >
-                    <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.firstname} title={'First Name'} name="First Name" />
-                    <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.lastname} title={'Last Name'} name="Last Name" />
-                    <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.email} title={'Email'} name="Email" />
-                    <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.phone} title={'Phone'} name="Phone" />
-                    <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.address} title={'Address'} name="Address" />
-                    <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.city} title={'City'} name="City" />
-                    <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.postalcode} title={'Postal Code'} name="Postal Code" />
-                        <div style={{position:`relative`}}>
-                            <button style={{position:`absolute`,right:`0px`,bottom:`0px`, width: `100px`, backgroundColor: `green`, height: `40px`, border:`none`, color:`#fff` }}> NEXT</button>
+                {this.state.showForm == "personal" &&
+                    <div className='personal'>
+                    <form>
+                        <div className="sectionHeading">
+                            <h3 className="sectionTitle" >Personal Details</h3>
+                        </div>
+                    </form>
+                    <div className="grid-2-col card" >
+                        <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.firstname} title={'First Name'} name="First Name" />
+                        <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.lastname} title={'Last Name'} name="Last Name" />
+                        <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.email} title={'Email'} name="Email" />
+                        <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.phone} title={'Phone'} name="Phone" />
+                        <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.address} title={'Address'} name="Address" />
+                        <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.city} title={'City'} name="City" />
+                        <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.postalcode} title={'Postal Code'} name="Postal Code" />
+                        <div className='btn-container'>
+                            <button className="custom-btn" onClick={(event) => this.handleEmployerDetails(event,2)}  > NEXT</button>
                         </div>
                     </div>
-</div>
+                </div>}
                 {/* Employer details */}
- <div style={{border:`1px solid #000`,padding:`10px`,borderRadius:`10px`,boxShadow:`0 0 3px #333`}}>
+                {this.state.showForm == "employer"  && <div className='employer'>
     
-                <div className="sectionHeading">
-                    <h3 className="sectionTitle" style={{textAlign:`center`,backgroundColor:`green`, color:`#fff`, width:`100%`}}>Employer Details</h3>
-                </div>
+                    <div className="sectionHeading">
+                        <h3 className="sectionTitle" >Employer Details</h3>
+                    </div>
 
-                <div className="grid-2-col card">
-                    <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.employerFullName} title={'Employer Full Name'} name="Employer Full Name" />
-                    <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.companyName} title={'Company Name'} name="Company Name" />
-                    <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.companyAddress} title={'Company Address'} name="Company Address" />
-                    <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.companyCity} title={'Company City'} name="Company City" />
-                    <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.companyCity} title={'Company Postal Code'} name="Company Postal Code" />
+                    <div className="grid-2-col card">
+                        <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.employerFullName} title={'Employer Full Name'} name="Employer Full Name" />
+                        <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.companyName} title={'Company Name'} name="Company Name" />
+                        <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.companyAddress} title={'Company Address'} name="Company Address" />
+                        <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.companyCity} title={'Company City'} name="Company City" />
+                        <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.companyCity} title={'Company Postal Code'} name="Company Postal Code" />
                
-                     <div style={{position:`relative`}}>
-                            <button style={{position:`absolute`,right:`0px`,bottom:`0px`, width: `100px`, backgroundColor: `green`, height: `40px`, border:`none`, color:`#fff` }}> NEXT</button>
+                        <div className='btn-container'>
+                            <button
+                                onClick={(event) => this.handleEmployerDetails(event,3)}
+                                > NEXT</button>
                         </div>
                     </div>
-                {/* Custom Fields going to be here */}
-</div>
+                    {/* Custom Fields going to be here */}
+                </div>}
                 {/* Components prompt image and text */}
+                {this.state.showForm == "other" &&<div className='other'>
+                    {this.props.values.components.length === 0 && (
+                        <div className="cover-components">
+                            <h4>Select a component</h4>
+                            <p>To fill your cover letter you need to select a component.</p>
+                        </div>
+                    )}
 
-                {this.props.values.components.length === 0 && (
-                    <div className="cover-components">
-                        <h4>Select a component</h4>
-                        <p>To fill your cover letter you need to select a component.</p>
-                    </div>
-                )}
+                    {/* <SimpleTextarea name="Paragraph" value={this.props.values.summary} handleInputs={this.props.handleInputs} title={'Paragraph'} /> */}
 
-                {/* <SimpleTextarea name="Paragraph" value={this.props.values.summary} handleInputs={this.props.handleInputs} title={'Paragraph'} /> */}
-
-                {this.props.values.components.map((component, index) => {
-                    if (component.type === 'Paragraph') {
-                        return (
-                            <div className="simpleTextArea">
-                                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                    <span className="inputTitle">{component.name}</span>
-                                    <span
-                                        onClick={() => {
-                                            this.props.handleComponentDelete(component.name);
-                                        }}
-                                        style={{ cursor: 'pointer', color: '#e74c3c' }}
-                                        className="inputTitle">
-                                        Remove
-                                    </span>
-                                </div>
-                                <textarea
-                                    onClick={(event) => {
-                                        this.adjustTextarea(event);
-                                    }}
-                                    style={{ overflow: 'auto' }}
-                                    value={component.content}
-                                    onChange={(event) => {
-                                        this.props.handleCoverParagraphChange(component.name, event.target.value);
-                                    }}
-                                />
-                                <span className="border"></span>
-                            </div>
-                        );
-                    } else if (component.type === 'List') {
-                        return (
-                            <div id="add-List" className="simpleTextArea">
-                                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                    <span className="inputTitle">{component.name}</span>
-                                    <span
-                                        onClick={() => {
-                                            this.props.handleComponentDelete(component.name);
-                                        }}
-                                        style={{ cursor: 'pointer', color: '#e74c3c' }}
-                                        className="inputTitle">
-                                        Remove
-                                    </span>
-                                </div>
-
-                                <div className="custom-list-item">
-                                    <div className="custom-list-item-number">List Name</div>
-
-                                    <div className="custom-list-item-input">
-                                        <input
-                                            type="text"
-                                            value={component.name}
-                                            onChange={(event) => {
-                                                this.handleListNameChange(component.name, event.target.value);
+                    {this.props.values.components.map((component, index) => {
+                        if (component.type === 'Paragraph') {
+                            return (
+                                <div className="simpleTextArea">
+                                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                        <span className="inputTitle">{component.name}</span>
+                                        <span
+                                            onClick={() => {
+                                                this.props.handleComponentDelete(component.name);
                                             }}
-                                        />
-                                        <div className="border-list"></div>
+                                            style={{ cursor: 'pointer', color: '#e74c3c' }}
+                                            className="inputTitle">
+                                            Remove
+                                        </span>
                                     </div>
+                                    <textarea
+                                        onClick={(event) => {
+                                            this.adjustTextarea(event);
+                                        }}
+                                        style={{ overflow: 'auto' }}
+                                        value={component.content}
+                                        onChange={(event) => {
+                                            this.props.handleCoverParagraphChange(component.name, event.target.value);
+                                        }}
+                                    />
+                                    <span className="border"></span>
                                 </div>
+                            );
+                        } else if (component.type === 'List') {
+                            return (
+                                <div id="add-List" className="simpleTextArea">
+                                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                        <span className="inputTitle">{component.name}</span>
+                                        <span
+                                            onClick={() => {
+                                                this.props.handleComponentDelete(component.name);
+                                            }}
+                                            style={{ cursor: 'pointer', color: '#e74c3c' }}
+                                            className="inputTitle">
+                                            Remove
+                                        </span>
+                                    </div>
 
-                                {/* Items */}
-                                {component.content.map((item, index) => (
                                     <div className="custom-list-item">
-                                        {/* <div className="custom-list-item-number">{index + 1}</div> */}
+                                        <div className="custom-list-item-number">List Name</div>
 
                                         <div className="custom-list-item-input">
                                             <input
                                                 type="text"
-                                                value={item}
+                                                value={component.name}
                                                 onChange={(event) => {
-                                                    this.handleListItemChange(component.name, index, event.target.value);
+                                                    this.handleListNameChange(component.name, event.target.value);
                                                 }}
                                             />
                                             <div className="border-list"></div>
                                         </div>
                                     </div>
-                                ))}
 
-                                <div className="add-item">
-                                    <BiPlus className="toggle-icon" />
-                                    <span onClick={() => this.addItemToList('Name', component.name)}> Add item </span>
-                                </div>
-                            </div>
-                        );
-                    }
-                })}
+                                    {/* Items */}
+                                    {component.content.map((item, index) => (
+                                        <div className="custom-list-item">
+                                            {/* <div className="custom-list-item-number">{index + 1}</div> */}
 
-                {/* Add field separator */}
+                                            <div className="custom-list-item-input">
+                                                <input
+                                                    type="text"
+                                                    value={item}
+                                                    onChange={(event) => {
+                                                        this.handleListItemChange(component.name, index, event.target.value);
+                                                    }}
+                                                />
+                                                <div className="border-list"></div>
+                                            </div>
+                                        </div>
+                                    ))}
 
-
-                <div className="addFields">
-                    <div className="addFields-wrapper">
-                        <a onClick={(event) => this.handleAddFieldsClick(event)} className="outline-primary">
-                            add field
-                        </a>
-
-                        <AnimatePresence>
-                            {this.state.addFieldsShowed && (
-                                <motion.div initial={{ opacity: 1, scale: 0.65 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 1 }} className="addFieldsDrop">
-                                    <div className="addFieldsDrop-head">Components</div>
-
-                                    <div className="addFieldsDrop-items">
-                                        <ul>
-                                            <li
-                                                onClick={(event) => {
-                                                    event.preventDefault();
-                                                    this.props.handleParagraphAdd();
-                                                    this.setState({ addFieldsShowed: false });
-                                                }}>
-                                                <ParagraphImage className="addFieldsDrop-icon" />
-                                                <a href="">Paragraph</a>
-                                            </li>
-
-                                            <li
-                                                onClick={(event) => {
-                                                    event.preventDefault();
-                                                    this.props.handleListAdd();
-                                                    this.setState({ addFieldsShowed: false });
-                                                }}>
-                                                <ListImage className="addFieldsDrop-icon" />
-                                                <a href="">List</a>
-                                            </li>
-                                        </ul>
+                                    <div className="add-item">
+                                        <BiPlus className="toggle-icon" />
+                                        <span onClick={() => this.addItemToList('Name', component.name)}> Add item </span>
                                     </div>
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
+                                </div>
+                            );
+                        }
+                    })}
+
+                    {/* Add field separator */}
+
+
+                    <div className="addFields">
+                        <div className="addFields-wrapper">
+                            <a onClick={(event) => this.handleAddFieldsClick(event)} className="outline-primary">
+                                add field
+                            </a>
+
+                            <AnimatePresence>
+                                {this.state.addFieldsShowed && (
+                                    <motion.div initial={{ opacity: 1, scale: 0.65 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 1 }} className="addFieldsDrop">
+                                        <div className="addFieldsDrop-head">Components</div>
+
+                                        <div className="addFieldsDrop-items">
+                                            <ul>
+                                                <li
+                                                    onClick={(event) => {
+                                                        event.preventDefault();
+                                                        this.props.handleParagraphAdd();
+                                                        this.setState({ addFieldsShowed: false });
+                                                    }}>
+                                                    <ParagraphImage className="addFieldsDrop-icon" />
+                                                    <a href="">Paragraph</a>
+                                                </li>
+
+                                                <li
+                                                    onClick={(event) => {
+                                                        event.preventDefault();
+                                                        this.props.handleListAdd();
+                                                        this.setState({ addFieldsShowed: false });
+                                                    }}>
+                                                    <ListImage className="addFieldsDrop-icon" />
+                                                    <a href="">List</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
                     </div>
-                </div>
+                </div>}
             </div>
         );
     }
