@@ -35,6 +35,7 @@ class Billing extends Component {
             isLoading: true,
             onlyPP: false,
             currency: '',
+            amount: null
         };
         this.customStyles();
         this.stripePromise = loadStripe(conf.stripe_publishable_key);
@@ -128,7 +129,7 @@ class Billing extends Component {
                     <div className="custom-page__content">
                         <div className="custom-page__Plans">
                             {this.state.step == 0 && (
-                                <PlansTable currency={this.state.currency} monthly={this.state.monthly} quartarly={this.state.quartarly} yearly={this.state.yearly} nextStep={this.nextStep} />
+                                <PlansTable currency={this.state.currency} monthly={this.state.monthly} quartarly={this.state.quartarly} yearly={this.state.yearly} nextStep={this.nextStep} amount={this.state.amount } />
                             )}
                             {this.state.step == 1 && (
                                 <ElementsConsumer>
@@ -138,6 +139,7 @@ class Billing extends Component {
                                             onlyPP={this.state.onlyPP}
                                             previousStep={this.previousStep}
                                             stripe={stripe}
+                                            amount={this.state.amount}
                                             elements={elements}
                                             monthly={this.state.monthly}
                                             quartarly={this.state.quartarly}

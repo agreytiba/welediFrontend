@@ -161,7 +161,7 @@ export function removeResume(userId, resumeId) {
 }
 
 // Add sbs
-export async function addSbs(type, paimentType, currentDate, price,uid) {
+export async function addSbs(type, paimentType, currentDate, price) {
   var uidOriginal = fire.auth().currentUser.uid;
     const db = fire.firestore();
     var sbsEnd = null;
@@ -178,7 +178,7 @@ export async function addSbs(type, paimentType, currentDate, price,uid) {
     }
 
     db.collection('subscriptions').add({
-        userId: uid,
+        userId: uidOriginal,
         type: type,
         sbsEnd: sbsEnd,
         paimentType: paimentType,

@@ -1,18 +1,42 @@
 import React, { Component } from 'react';
 import Checkimage from '../../../assets/check.png';
 import { withTranslation } from 'react-i18next';
+import Spinner from '../../Pay/loader';
+import axios from 'axios';
+
+
+
 class PlansTable extends Component {
     constructor(props) {
         super(props);
     }
 
- 
+  state = {
+        isLoading: false,
+        showForm: false,
+    };
+
+    handleGetToken = async (Data) => {
+        try {
+            this.setState({ isLoading: true });
+            const result = await axios.get("http://localhost:8080/api/checkout");
+console.log(result);
+            if (result.data.success && result.data.message === 'Token generated successfully') {
+                this.setState({ isLoading: false });
+                this.props.nextStep(Data)
+            }
+        } catch (error) {
+            console.error('Error:', error.response ? error.response.data : error.message);
+        }
+    };
 
     render() {
         const { t } = this.props;
 
         return (
-            <>
+          <>
+            {this.state.isLoading ? <Spinner /> :
+            <div>
                 <div className="custom-page__Plans-heading">
                     <h1>{t('static.plansHeader')}</h1>
                     <p>{t('static.plansDesc')}</p>
@@ -73,9 +97,11 @@ class PlansTable extends Component {
                                     </div>
                                 </li>
                             </ul>
-                            <div onClick={() => this.props.nextStep('monthly')} className="planCard-paymentBtnBasic">
-                                {t('static.upgradeAndDownload')}
-                            </div>
+                          
+                          <div onClick={() => { this.handleGetToken('monthly'); }} className="planCard-paymentBtnBasic">
+    {t('static.upgradeAndDownload')}
+</div>
+
                         </div>
                     </div>
                     {/* Card */}
@@ -132,7 +158,8 @@ class PlansTable extends Component {
                                     </div>
                                 </li>
                             </ul>
-                            <div onClick={() => this.props.nextStep('halfYear')} className="planCard-paymentBtnBasic planCard-paymentBtnBasic-active">
+                        
+                            <div onClick={() => { this.handleGetToken('halfYear'); }} className="planCard-paymentBtnBasic planCard-paymentBtnBasic-active">
                                 {t('static.upgradeAndDownload')}
                             </div>
                         </div>
@@ -192,12 +219,13 @@ class PlansTable extends Component {
                                     </div>
                                 </li>
                             </ul>
-                            <div onClick={() => this.props.nextStep('yearly')} className="planCard-paymentBtnBasic">
+                        
+                            <div  onClick={() => { this.handleGetToken('yearly'); }}  className="planCard-paymentBtnBasic">
                                 {t('static.upgradeAndDownload')}
                             </div>
                         </div>
                     </div>
-                </div>
+                </div></div>}
             </>
         );
     }
