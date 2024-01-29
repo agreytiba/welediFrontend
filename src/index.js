@@ -50,28 +50,28 @@ ReactDOM.render(
 
                 {/* Export routes*/}
                 
-                <Route exact path="/export/Cv1/:resumeId/:language" render={(props) => <Exporter resumeName="Cv1" export={true} {...props} />} />
-                <Route exact path="/export/Cv2/:resumeId/:language" render={(props) => <Exporter resumeName="Cv2" export={true} {...props} />} />
-                <Route exact path="/export/Cv3/:resumeId/:language" render={(props) => <Exporter resumeName="Cv3" export={true} {...props} />} />
-                <Route exact path="/export/Cv4/:resumeId/:language" render={(props) => <Exporter resumeName="Cv4" export={true} {...props} />} />
-                <Route exact path="/export/Cv5/:resumeId/:language" render={(props) => <Exporter resumeName="Cv5" export={true} {...props} />} />
-                <Route exact path="/export/Cv6/:resumeId/:language" render={(props) => <Exporter resumeName="Cv6" export={true} {...props} />} />
-                <Route exact path="/export/Cv7/:resumeId/:language" render={(props) => <Exporter resumeName="Cv7" export={true} {...props} />} />
-                <Route exact path="/export/Cv8/:resumeId/:language" render={(props) => <Exporter resumeName="Cv8" export={true} {...props} />} />
-                <Route exact path="/export/Cv9/:resumeId/:language" render={(props) => <Exporter resumeName="Cv9" export={true} {...props} />} />
-                <Route exact path="/export/Cv10/:resumeId/:language" render={(props) => <Exporter resumeName="Cv10" export={true} {...props} />} />
-                <Route exact path="/export/Cv11/:resumeId/:language" render={(props) => <Exporter resumeName="Cv11" export={true} {...props} />} />
-                <Route exact path="/export/Cv12/:resumeId/:language" render={(props) => <Exporter resumeName="Cv12" export={true} {...props} />} />
-                <Route exact path="/export/Cv13/:resumeId/:language" render={(props) => <Exporter resumeName="Cv13" export={true} {...props} />} />
-                <Route exact path="/export/Cv14/:resumeId/:language" render={(props) => <Exporter resumeName="Cv14" export={true} {...props} />} />
-                <Route exact path="/export/Cv15/:resumeId/:language" render={(props) => <Exporter resumeName="Cv15" export={true} {...props} />} />
+                <Route exact path="/export/Cv1/:resumeId" render={(props) => <Exporter resumeName="Cv1" export={true} {...props} />} />
+                <Route exact path="/export/Cv2/:resumeId" render={(props) => <Exporter resumeName="Cv2" export={true} {...props} />} />
+                <Route exact path="/export/Cv3/:resumeId" render={(props) => <Exporter resumeName="Cv3" export={true} {...props} />} />
+                <Route exact path="/export/Cv4/:resumeId" render={(props) => <Exporter resumeName="Cv4" export={true} {...props} />} />
+                <Route exact path="/export/Cv5/:resumeId" render={(props) => <Exporter resumeName="Cv5" export={true} {...props} />} />
+                <Route exact path="/export/Cv6/:resumeId" render={(props) => <Exporter resumeName="Cv6" export={true} {...props} />} />
+                <Route exact path="/export/Cv7/:resumeId" render={(props) => <Exporter resumeName="Cv7" export={true} {...props} />} />
+                <Route exact path="/export/Cv8/:resumeId" render={(props) => <Exporter resumeName="Cv8" export={true} {...props} />} />
+                <Route exact path="/export/Cv9/:resumeId" render={(props) => <Exporter resumeName="Cv9" export={true} {...props} />} />
+                <Route exact path="/export/Cv10/:resumeId" render={(props) => <Exporter resumeName="Cv10" export={true} {...props} />} />
+                <Route exact path="/export/Cv11/:resumeId" render={(props) => <Exporter resumeName="Cv11" export={true} {...props} />} />
+                <Route exact path="/export/Cv12/:resumeId" render={(props) => <Exporter resumeName="Cv12" export={true} {...props} />} />
+                <Route exact path="/export/Cv13/:resumeId" render={(props) => <Exporter resumeName="Cv13" export={true} {...props} />} />
+                <Route exact path="/export/Cv14/:resumeId" render={(props) => <Exporter resumeName="Cv14" export={true} {...props} />} />
+                <Route exact path="/export/Cv15/:resumeId" render={(props) => <Exporter resumeName="Cv15" export={true} {...props} />} />
 
                 {/* Covers export routes */}
 
-                <Route exact path="/export/Cover1/:resumeId/:language" render={(props) => <Exporter resumeName="Cover1" export={true} {...props} />} />
-                <Route exact path="/export/Cover2/:resumeId/:language" render={(props) => <Exporter resumeName="Cover2" export={true} {...props} />} />
-                <Route exact path="/export/Cover3/:resumeId/:language" render={(props) => <Exporter resumeName="Cover3" export={true} {...props} />} />
-                <Route exact path="/export/Cover4/:resumeId/:language" render={(props) => <Exporter resumeName="Cover4" export={true} {...props} />} />
+                <Route exact path="/export/Cover1/:resumeId" render={(props) => <Exporter resumeName="Cover1" export={true} {...props} />} />
+                <Route exact path="/export/Cover2/:resumeId" render={(props) => <Exporter resumeName="Cover2" export={true} {...props} />} />
+                <Route exact path="/export/Cover3/:resumeId" render={(props) => <Exporter resumeName="Cover3" export={true} {...props} />} />
+                <Route exact path="/export/Cover4/:resumeId" render={(props) => <Exporter resumeName="Cover4" export={true} {...props} />} />
                 <Route exact path="/cvtest" render={(props) => <Cover4 {...props} />} />
 
 

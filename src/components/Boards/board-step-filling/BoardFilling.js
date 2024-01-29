@@ -123,7 +123,9 @@ class BoardFilling extends Component {
 
         axios
             .post(
-                config.provider+'://' + config.backendUrl + '/api/export',
+            // config.provider+'://' + config.backendUrl + '/api/export',
+            'http://localhost:8080/api/export',
+                
                 {
                     language: this.props.values.language,
                     resumeId: localStorage.getItem('currentResumeId'),
@@ -176,8 +178,7 @@ class BoardFilling extends Component {
     }
 
     async saveCoverToDatabase(values) {
-        console.log('user id is ');
-        console.log(localStorage.getItem('user'));
+       
         await addCoverLetter(localStorage.getItem('user'), values);
     }
 

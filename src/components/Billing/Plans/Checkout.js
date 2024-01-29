@@ -155,7 +155,7 @@ class Checkout extends Component {
       if (result.data) {
         const time = result.data.date;
       
-     
+     const currentUser = localStorage.getItem('user')
 
  addSbs(
         this.props.selectedPlan,
@@ -167,7 +167,8 @@ class Checkout extends Component {
          ? this.props.quartarly
          : this.props.selectedPlan == "yearly"
         ? this.props.yearly
-         : 0
+         : 0,
+        currentUser
       );
           this.setState({ info: result.data });
           this.setState({ isLoading: false });

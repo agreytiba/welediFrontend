@@ -3,11 +3,11 @@ import './Login.scss'
 import GoogleImage from '../../../assets/google.png'
 import FacebookImage from '../../../assets/facebook.png'
 import Input from '../../Form/simple-input/SimpleInput'
-import fire,{googleProvider,facebookProvider} from '../../../conf/fire';
-//import firebase from 'firebase';
+import fire, { googleProvider, facebookProvider } from '../../../conf/fire';
 import addUser from '../../../firestore/auth'
 import { IncrementUsers } from '../../../firestore/dbOperations';
 import { withTranslation } from 'react-i18next';
+
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -20,18 +20,21 @@ class Login extends Component {
         this.signInWithFacebook = this.signInWithFacebook.bind(this);
         this.login = this.login.bind(this);
     }
+
     login(event) {
         event.preventDefault();
         fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
+            // Successfully Logged in 
 
-            // Succefully Logged in 
-            this.props.closeModal();  // To close  login  modal on success
+            
 
+            this.props.closeModal();  // To close the login modal on success
         }).catch((error) => {
             this.props.throwError(error.message);
             console.log(error);
         });
     }
+
     handleInputs(title, value) {
         switch (title) {
             case "Email":
@@ -44,48 +47,39 @@ class Login extends Component {
                 break;
         }
     }
-    signInWithGoogle() {
 
+    signInWithGoogle() {
         fire.auth().signInWithPopup(googleProvider).then(function (result) {
             // This gives you a Google Access Token. You can use it to access the Google API.
             var token = result.credential.accessToken;
             // The signed-in user info.
             var user = result.user;
-            addUser(user.uid, "Welcome", "back", user.email)
-            // ...
+            
+            addUser(user.uid, "Welcome", "back", user.email);
         }).catch(function (error) {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
-            // The email of the user's account used.
             var email = error.email;
-            // The firebase.auth.AuthCredential type that was used.
             var credential = error.credential;
-            // ...
         });
         this.props.closeModal();
     }
+
     signInWithFacebook() {
         fire.auth().signInWithPopup(facebookProvider).then(function (result) {
-            // This gives you a Google Access Token. You can use it to access the Google API.
             var token = result.credential.accessToken;
-            // The signed-in user info.
             var user = result.user;
-            addUser(user.uid, "Welcome", "back", user.email)
-
-            // ...
+            addUser(user.uid, "Welcome", "back", user.email);
         }).catch(function (error) {
-            // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
-            // The email of the user's account used.
             var email = error.email;
-            // The firebase.auth.AuthCredential type that was used.
             var credential = error.credential;
-            // ...
         });
         this.props.closeModal();
     }
+
     render() {
         const { t } = this.props;
         return (
@@ -95,22 +89,18 @@ class Login extends Component {
                 </div>
                 <div className="body">
                     <div className="socialAuth">
-                        {/* Google */}
                         <div onClick={() => { this.signInWithGoogle() }} className="googleAuthItem">
-                            <img src={GoogleImage} />
+                            <img src={GoogleImage} alt="Google" />
                             <span>{t("login.googleLogin")} Google</span>
                         </div>
-                        {/* Facebook */}
                         <div onClick={() => { this.signInWithFacebook() }} className="facebookAuthItem">
-                            <img src={FacebookImage} />
+                            <img src={FacebookImage} alt="Facebook" />
                             <span>{t("login.facebookLogin")} Facebook</span>
                         </div>
-                        {/* Devider */}
                         <div className="devider">
                             <hr />
                             <span>{t("login.or")}</span>
                         </div>
-                        {/* Login Form  */}
                         <form onSubmit={this.login}>
                             <div>
                                 <Input name="Email" title={t("login.email")} handleInputs={this.handleInputs} />
@@ -122,7 +112,6 @@ class Login extends Component {
                         </form>
                     </div>
                 </div>
-                {/* Modal Footer */}
                 <div className="modalFooter">
                     <span>{t("login.dontHaveAcc")}<a onClick={() => this.props.handleNavigationClick()}>{t("login.signup")}</a></span>
                     <span>{t("login.passwordLost")} <a onClick={() => this.props.showPasswordRecovery()}>{t("login.recoverPassword")}</a></span>
@@ -131,5 +120,6 @@ class Login extends Component {
         );
     }
 }
+
 const MyComponent = withTranslation('common')(Login)
 export default MyComponent;

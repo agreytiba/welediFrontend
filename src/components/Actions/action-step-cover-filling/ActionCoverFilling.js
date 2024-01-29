@@ -11,6 +11,7 @@ import { ReactComponent as ComponentImage } from '../../../assets/component.svg'
 import './ActionCoverFilling.scss';
 import { AnimatePresence, motion } from 'framer-motion';
 import {BiPlus} from 'react-icons/bi'
+import ReusableButton from '../../Form/reusablButton/ReusableButton';
 class ActionCoverFilling extends Component {
     constructor(props) {
         super(props);
@@ -119,8 +120,13 @@ class ActionCoverFilling extends Component {
                         <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.city} title={'City'} name="City" />
                         <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.postalcode} title={'Postal Code'} name="Postal Code" />
                         <div className='btn-container'>
-                            <button className="custom-btn" onClick={(event) => this.handleEmployerDetails(event,2)}  > NEXT</button>
-                        </div>
+                            {/* <button className="custom-btn" onClick={(event) => this.handleEmployerDetails(event,2)}  > NEXT</button>
+                       */}
+                                             <ReusableButton
+                    onClick={(e) => this.handleEmployerDetails(e, 2)}
+                    label="NEXT"
+                  />
+                            </div>
                     </div>
                 </div>}
                 {/* Employer details */}
@@ -138,9 +144,13 @@ class ActionCoverFilling extends Component {
                         <SimpleInput handleInputs={this.props.handleInputs} value={this.props.values.companyCity} title={'Company Postal Code'} name="Company Postal Code" />
                
                         <div className='btn-container'>
-                            <button
+                            {/* <button
                                 onClick={(event) => this.handleEmployerDetails(event,3)}
-                                > NEXT</button>
+                            > NEXT</button> */}
+                               <ReusableButton
+                    onClick={(e) => this.handleEmployerDetails(e, 3)}
+                    label="NEXT"
+                  />
                         </div>
                     </div>
                     {/* Custom Fields going to be here */}

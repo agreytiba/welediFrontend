@@ -55,7 +55,7 @@ class ImgUploadInput extends Component {
       <div className="imageInputUpload">
           <h4>upload image</h4>
         {<ImageUploader
-          withIcon={true}
+          withIcon={false}
           buttonText="Choose images"
           onChange={this.onDrop}
           imgExtension={[".jpg", ".gif", ".png", ".gif"]}

@@ -7,7 +7,7 @@
       justify-self: center;
       align-self: center;
    }
-   
+ 
 }
 
 
@@ -228,6 +228,12 @@
    text-align: center;
    margin-bottom: 5px;
 }
+ .btn-container{
+      display: flex;
+      justify-content: end;
+      align-items: end;
+      margin-top: 10px;
+   }
         .custom-btns {
   width:200px;
   height: 40px;
@@ -245,4 +251,4 @@
    7px 7px 20px 0px rgba(0,0,0,.1),
    4px 4px 5px 0px rgba(0,0,0,.1);
   outline: none;
-}
+} 

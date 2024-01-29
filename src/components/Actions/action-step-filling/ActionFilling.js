@@ -557,7 +557,7 @@ class ActionFilling extends Component {
                     </span>
                   </div>
 
-                <div >
+                <div className="btn-container" >
                 
               
                     <ReusableButton
@@ -609,7 +609,7 @@ class ActionFilling extends Component {
               />
 
               <div>
-                <div>
+                <div className="btn-container">
                   <ReusableButton
                     onClick={(e) => this.handleShowForm(e, 3)}
                     label="NEXT"
@@ -642,7 +642,7 @@ class ActionFilling extends Component {
                   </span>
                 </div>
                 <div>
-                  <div>
+                  <div className="btn-container">
                     <ReusableButton
                       onClick={(e) => this.handleShowForm(e, 4)}
                       label="NEXT"
@@ -681,7 +681,7 @@ class ActionFilling extends Component {
                   </span>
                 </div>
                 <div>
-                  <div>
+                  <div className="btn-container">
                     <ReusableButton
                       onClick={(e) => this.handleShowForm(e, 5)}
                       label="NEXT"
@@ -705,7 +705,7 @@ class ActionFilling extends Component {
                   </span>
                 </div>
                 <div>
-                  <div>
+                  <div className="btn-container">
                     <ReusableButton
                       onClick={(e) => this.handleShowForm(e, 6)}
                       label="NEXT"
