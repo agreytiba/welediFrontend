@@ -20,7 +20,8 @@ import SuccessAnimation from "../../../assets/animations/50049-nfc-successful.js
 import { withTranslation } from "react-i18next";
 import Lottie from "lottie-react";
 import { useLottie } from "lottie-react";
-
+import config from "../../../conf/configuration";
+import Spinner from "../../Spinner/Spinner";
 const successOptions = {
   loop: false,
   autoplay: true,
@@ -102,6 +103,7 @@ class Checkout extends Component {
       currency: "TZS",
       provider: "",
       info: null,
+      amount:null,
     };
     this.nextStep = this.nextStep.bind(this);
     this.previousStep = this.previousStep.bind(this);
@@ -139,8 +141,21 @@ class Checkout extends Component {
    
  handleSubmit = async () => {
     
-   const { accountNumber, currency, provider } = this.state
-   const amount = 5000
+   //get amount of each package
+    if (this.props.selectedPlan == "monthly") {
+    this.setState({amount: this.props.monthly})
+   }
+   if (this.props.selectedPlan == "halfYear") {
+    this.setState({amount: this.props.quartarly})
+   }
+   if (this.props.selectedPlan == "yearly") {
+    this.setState({amount: this.props.yearly})
+   }
+
+
+   const { accountNumber, currency, provider,amount} = this.state
+
+  
      const  generateRandomNumber = () => {
         return Math.floor(10000000 + Math.random() * 90000000);
    };
@@ -150,7 +165,9 @@ class Checkout extends Component {
        this.setState({ isLoading: true });
         const randomExternalId = generateRandomNumber().toString().substring(0, 8);
        
-      const result = await axios.post("http://localhost:8080/api/checkout", { accountNumber, currency,provider,amount, externalId: randomExternalId });
+      // const result = await axios.post("http://localhost:8080/api/checkout", { accountNumber, currency, provider, amount, externalId: randomExternalId });
+       const result = await axios.post(config.provider+"://" + config.backendUrl + "/api/checkout", { accountNumber, currency, provider, amount, externalId: randomExternalId } );
+        
   
       if (result.data) {
         const time = result.data.date;
@@ -256,128 +273,130 @@ class Checkout extends Component {
     const { t } = this.props;
 
     return (
-      <div className="checkout__content">
-        {/* Left */}
-        <div className="checkout__content-left">
-          <div className="checkout__content-left-wrapper">
-            <h2 className="checkout__content-leftTitle">
-              {t("static.payment1")}
-            </h2>
-            {/* Paiment list */}
-            <ul className="checkout__content-leftList">
-              <li>
-                {" "}
-                <img src={CheckImage} alt="check" /> {t("static.payment2")}
-              </li>
-              <li>
-                {" "}
-                <img src={CheckImage} alt="check" /> {t("static.payment3")}
-              </li>
-              <li>
-                {" "}
-                <img src={CheckImage} alt="check" /> {t("static.payment4")}
-              </li>
-            </ul>
-            {/* Questio */}
-            <div className="checkout__content-leftQuestion">
-              <h3>{t("static.payment5")}</h3>
-              <p>{t("static.payment6")}</p>
-            </div>
-            {/* Questio */}
-            <div className="checkout__content-leftQuestion">
-              <h3>Payment Method</h3>
-              <div className="methods">
-                <img src={airtel} alt="card" />
-                <img src={Tigopesa} alt="card" />
-                <img src={Halopesa} alt="card" />
-                {/* {/* <img src={JCB} alt="card" /> */}
-                <img src={Mpesa} alt="card" /> 
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* Right */}
-        <div className="checkout__content-right">
-          <div className="checkout__content-rightWrapper">
-            <div className="head">
-              {/* Head */}
-              <span>{t("static.payment8")}</span>
-              <span>
-                {" "}
-                {this.props.currency}
-                {this.props.selectedPlan == "monthly"
-                  ? this.props.monthly
-                  : this.props.selectedPlan == "halfYear"
-                  ? this.props.quartarly
-                  : this.props.yearly}{" "}
-              </span>
-            </div>
-            {/* Postal code */}
-            {this.state.step == 0 && (
-              <div className="body">
-                <p className="whereLocated">{t("static.payment9")}</p>
-                <p className="description">{t("static.payment10")}</p>
-                <div className="group-provider">
-                  {" "}
-                  <a
-                    onClick={() => {
-                      this.nextStep();
-                      this.setState({ provider: "Tigo" });
-                    }}
-                  >
-                    <img className="provider" src={Tigopesa} alt="Tigo pesa" />
-                  </a>
-                  <a
-                    onClick={() => {
-                      this.nextStep();
-                      this.setState({ provider: "Halopesa" });
-                    }}
-                  >
-                    <img className="provider" src={Halopesa} alt="halopesa" />
-                  </a>
-                  <a
-                    onClick={() => {
-                      this.nextStep();
-                      this.setState({ provider: "Airtel" });
-                    }}
-                  >
-                    <img className="provider" src={airtel} alt="airtel" />
-                  </a>
+      <>
+        {this.state.isLoading ? <Spinner /> :
+          <div className="checkout__content">
+            {/* Left */}
+            <div className="checkout__content-left">
+              <div className="checkout__content-left-wrapper">
+                <h2 className="checkout__content-leftTitle">
+                  {t("static.payment1")}
+                </h2>
+                {/* Paiment list */}
+                <ul className="checkout__content-leftList">
+                  <li>
+                    {" "}
+                    <img src={CheckImage} alt="check" /> {t("static.payment2")}
+                  </li>
+                  <li>
+                    {" "}
+                    <img src={CheckImage} alt="check" /> {t("static.payment3")}
+                  </li>
+                  <li>
+                    {" "}
+                    <img src={CheckImage} alt="check" /> {t("static.payment4")}
+                  </li>
+                </ul>
+                {/* Questio */}
+                <div className="checkout__content-leftQuestion">
+                  <h3>{t("static.payment5")}</h3>
+                  <p>{t("static.payment6")}</p>
                 </div>
-              
+                {/* Questio */}
+                <div className="checkout__content-leftQuestion">
+                  <h3>Payment Method</h3>
+                  <div className="methods">
+                    <img src={airtel} alt="card" />
+                    <img src={Tigopesa} alt="card" />
+                    <img src={Halopesa} alt="card" />
+                    {/* {/* <img src={JCB} alt="card" /> */}
+                    <img src={Mpesa} alt="card" />
+                  </div>
+                </div>
               </div>
-            )}
-            {this.state.step == 1 && (
-              <div className="body">
-                <p className="whereLocated">{t("static.payment9")}</p>
-                <p className="description">{t("static.payment10")}</p>
-                <h4>paying using {this.state.provider }</h4>
-                <p className="description" >selectedPlan:  {this.props.selectedPlan}</p>
-                {/* <DropdownInput
+            </div>
+            {/* Right */}
+            <div className="checkout__content-right">
+              <div className="checkout__content-rightWrapper">
+                <div className="head">
+                  {/* Head */}
+                  <span>{t("static.payment8")}</span>
+                  <span>
+                    {" "}
+                    {this.props.currency}
+                    {this.props.selectedPlan == "monthly"
+                      ? this.props.monthly
+                      : this.props.selectedPlan == "halfYear"
+                        ? this.props.quartarly
+                        : this.props.yearly}{" "}
+                  </span>
+                </div>
+                {/* Postal code */}
+                {this.state.step == 0 && (
+                  <div className="body">
+                    <p className="whereLocated">{t("static.payment9")}</p>
+                    <p className="description">{t("static.payment10")}</p>
+                    <div className="group-provider">
+                      {" "}
+                      <a
+                        onClick={() => {
+                          this.nextStep();
+                          this.setState({ provider: "Tigo" });
+                        }}
+                      >
+                        <img className="provider" src={Tigopesa} alt="Tigo pesa" />
+                      </a>
+                      <a
+                        onClick={() => {
+                          this.nextStep();
+                          this.setState({ provider: "Halopesa" });
+                        }}
+                      >
+                        <img className="provider" src={Halopesa} alt="halopesa" />
+                      </a>
+                      <a
+                        onClick={() => {
+                          this.nextStep();
+                          this.setState({ provider: "Airtel" });
+                        }}
+                      >
+                        <img className="provider" src={airtel} alt="airtel" />
+                      </a>
+                    </div>
+              
+                  </div>
+                )}
+                {this.state.step == 1 && (
+                  <div className="body">
+                    <p className="whereLocated">{t("static.payment9")}</p>
+                    <p className="description">{t("static.payment10")}</p>
+                    <h4>paying using {this.state.provider}</h4>
+                    <p className="description" >selectedPlan:  {this.props.selectedPlan}</p>
+                    {/* <DropdownInput
                   handleInputs={this.handleInput}
                   placeholder="Tanzania"
                   checkout={true}
                   title="Country"
                   options={this.countries}
                 /> */}
-                <input
-                  className="input-pay"
-                  style={{padding:`10px`, height:`30px`,backgroundColor:`ededed`}}
-              type="text"
-              placeholder="Phone Number"
-              value={this.state.accountNumber}
-              onChange={(event) => this.setState({ accountNumber: event.target.value })}
-            />
-                <div
-                  onClick={() =>this.handleSubmit() }
-                  className="checkout-continue-btn"
-                >
-                  Pay
-                </div>
-              </div>
-            )}
-            {/* Pick method  */}
-            {/* {this.state.step == 2 && (
+                    <input
+                      className="input-pay"
+                      style={{ padding: `10px`, height: `30px`, backgroundColor: `ededed` }}
+                      type="text"
+                      placeholder="Phone Number"
+                      value={this.state.accountNumber}
+                      onChange={(event) => this.setState({ accountNumber: event.target.value })}
+                    />
+                    <div
+                      onClick={() => this.handleSubmit()}
+                      className="checkout-continue-btn"
+                    >
+                      Pay
+                    </div>
+                  </div>
+                )}
+                {/* Pick method  */}
+                {/* {this.state.step == 2 && (
               <div className="body">
                 {this.props.onlyPP == false ||
                 this.props.onlyPP == undefined ? (
@@ -439,8 +458,8 @@ class Checkout extends Component {
                 </div>
               </div>
             )} */}
-            {/* Checkout  */}
-            {/* {this.state.step == 2 &&
+                {/* Checkout  */}
+                {/* {this.state.step == 2 &&
                             // <div className="body">
                             //     <div className="card-details">
                             //         <input onChange={(event) => this.handleInput("CardHolder", event)} placeholder={t('static.payment15')} className="card-nameHolder" />
@@ -464,30 +483,31 @@ class Checkout extends Component {
                             //     </div>
                             // </div>
                         }  */}
-            {/*  Loding - > Success   */}
-            {this.state.step == 2 && (
-              <div className="body" style={{padding:`20px`}}>
-                <div className="paimentConfirmation">
-                  <h2 style={{color:`green`}}> PROCESSING PAYMENT</h2>
-                  <h2>{this.state.info.message}</h2>
-                  <p><span>transactionId: </span>{this.state.info.transactionId}</p>
-                  <div
-                    onClick={() => {
-                      window.location.href = window.location.pathname + "/";
-                    }}
-                    className="checkout-continue-btn"
-                  >
-                    Close
+                {/*  Loding - > Success   */}
+                {this.state.step == 2 && (
+                  <div className="body" style={{ padding: `20px` }}>
+                    <div className="paimentConfirmation">
+                      <h2 style={{ color: `green` }}> PROCESSING PAYMENT</h2>
+                      <h2>{this.state.info.message}</h2>
+                      <p><span>transactionId: </span>{this.state.info.transactionId}</p>
+                      <div
+                        onClick={() => {
+                          window.location.href = window.location.pathname + "/";
+                        }}
+                        className="checkout-continue-btn"
+                      >
+                        Close
+                      </div>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
-            )}
-          </div>
-        </div>
-        {/* <Elements stripe={this.stripePromise}>
+            </div>
+            {/* <Elements stripe={this.stripePromise}>
             <CardElement /> 
             </Elements> */}
-      </div>
+          </div>}
+      </>
     );
   }
 }

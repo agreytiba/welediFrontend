@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import Checkimage from '../../../assets/check.png';
 import { withTranslation } from 'react-i18next';
-import Spinner from '../../Pay/loader';
+// import Spinner from '../../Pay/loader';
 import axios from 'axios';
-
-
-
+import { BASE_URL } from '../../../conf/baseUrl';
+import config from '../../../conf/configuration' 
+import Spinner from '../../../components/Spinner/Spinner' 
 class PlansTable extends Component {
     constructor(props) {
         super(props);
@@ -19,8 +19,10 @@ class PlansTable extends Component {
     handleGetToken = async (Data) => {
         try {
             this.setState({ isLoading: true });
-            const result = await axios.get("http://localhost:8080/api/checkout");
-console.log(result);
+             const result = await axios.get(config.provider+"://" + config.backendUrl + "/api/checkout" );
+        
+//             const result = await axios.get("http://localhost:8080/api/checkout");
+// console.log(result);
             if (result.data.success && result.data.message === 'Token generated successfully') {
                 this.setState({ isLoading: false });
                 this.props.nextStep(Data)
