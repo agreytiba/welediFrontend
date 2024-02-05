@@ -98,7 +98,7 @@ class BoardFilling extends Component {
                 } else {
                     this.saveToDatabase();
                     setTimeout(() => {
-                        window.location.href = './billing/plans';
+                        window.location.href = '/billing/plans';
                     }, 8000);
                 }
             }
@@ -123,8 +123,8 @@ class BoardFilling extends Component {
 
         axios
             .post(
-            // config.provider+'://' + config.backendUrl + '/api/export',
-            'http://localhost:8080/api/export',
+            config.provider+'://' + config.backendUrl + '/api/export',
+            // 'http://localhost:8080/api/export',
                 
                 {
                     language: this.props.values.language,
